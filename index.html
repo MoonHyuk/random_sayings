@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script>
+            window.onload = function () {
+                var contents, content, author;
+                var req = new XMLHttpRequest();
+                req.open("GET", "contents.txt", true);
+                req.onreadystatechange = function () {
+                    if (req.readyState == 4 && req.status == 200) {
+                        contents = req.responseText.trim().split("\n");
+                        var len = contents.length;
+                        var temp = contents[Math.floor(Math.random() * len)].split("-");
+                        content = temp[0].trim();
+                        author = temp[1].trim();
+                        document.getElementsByClassName("content")[0].innerHTML = content;
+                        document.getElementsByClassName("author")[0].innerHTML = "- " + author;
+                    }
+                };
+                req.send();
+            }
+        </script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <h1 class="content"></h1>
+            <h2 class="author"></h2>
+        </div>
+    </body>
+</html>
